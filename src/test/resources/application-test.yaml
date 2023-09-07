@@ -1,0 +1,6 @@
+wiremock:
+  reset-mappings-after-each-test: true
+
+logging:
+  level:
+    com.vmware.tanzu.demos.sta: DEBUG

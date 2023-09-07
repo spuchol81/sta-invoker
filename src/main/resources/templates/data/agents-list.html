@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+  <div class="agent col-5 shadow-sm m-2 rounded" th:each="agent: ${agents}" th:unless="${agents.isEmpty()}">
+    <section class="m-0 pt-2">
+      <p class="text-secondary small m-0" th:switch="${agent.status.toString()}">
+        <img th:case="${'SUCCESS'}" th:src="@{/images/status-success.png}" width="16" height="16" alt="Success"/>
+        <img th:case="${'RUNNING'}" th:src="@{/images/status-running.gif}" width="16" height="16" alt="Running"/>
+        <img th:case="${'ERROR'}" th:src="@{/images/status-error.png}" width="16" height="16" alt="Error"/>
+        <img th:case="${'PENDING'}" th:src="@{/images/status-pending.png}" width="16" height="16" alt="Pending"/>
+        <a th:href="${agent.url}" th:text="${agent.url}" target="_"></a>
+      </p>
+      <pre class="agent-output mt-3 font-monospace overflow-auto"
+           th:if="${agent.output == null}">(no output available)</pre>
+      <pre class="agent-output mt-3 font-monospace overflow-auto" th:unless="${agent.output == null}"
+           th:text="${#strings.escapeXml(agent.output)}"></pre>
+      <div th:if="${agent.executionTime() != null}">
+        <hr/>
+        <p class="text-secondary small m-0 mb-2" th:if="${agent.executionTime != null}"
+           th:text="${'⌛ ' + @durationFormatter.format(agent.executionTime)}"></p>
+      </div>
+    </section>
+  </div>
+  <div class="agent col-5 shadow-sm m-2 rounded" th:if="${agents.isEmpty()}">
+    <p class="text-center align-middle m-4">⚠️ No trading agents registered!</p>
+  </div>
+</div>

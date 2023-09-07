@@ -1,0 +1,21 @@
+.navbar-brand img {
+  margin-bottom: 2px;
+}
+
+.navbar-brand {
+  font-size: 90% !important;
+}
+
+.navbar-text {
+  font-size: 70% !important;
+}
+
+.github-fork-ribbon:before {
+  background-color: black;
+}
+
+.agent {
+  min-width: 400px !important;
+  max-width: 600px !important;
+  max-height: 600px !important;
+}
