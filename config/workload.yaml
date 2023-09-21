@@ -16,6 +16,12 @@ spec:
     env:
     - name: BP_JVM_VERSION
       value: "17"
+  resources:
+    requests:
+      cpu: 2
+      memory: 2Gi
+    limits:
+      memory: 2Gi
   params:
   - name: annotations
     value:
