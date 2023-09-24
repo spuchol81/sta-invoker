@@ -35,3 +35,4 @@ build/
 accelerator-log.md
 
 application-secrets.yaml
+.DS_Store

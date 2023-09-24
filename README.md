@@ -1,56 +1,55 @@
-# Awesome Spring Boot Frontend
+# Spring Trading App :: Trading Agent Invoker
 
-This template relies on [Spring Boot](https://spring.io/projects/spring-boot)
-to serve a [Bootstrap](https://getbootstrap.com/) backed UI,
-including [OpenTelemetry](https://opentelemetry.io/) support.
+> [!NOTE]
+> This is one of many components from
+> [Spring Trading App](https://github.com/alexandreroman/sta).
 
-Using this template, you can create frontend apps in Java with your favorite
-development framework.
-Thanks to [Spring Boot Devtools](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools),
-you can build your app with live reloading: for example you see the result of editing
-CSS/HTML files without having to restart the app.
+This component takes care of kickstarting trading agents, by periodically calling
+the public URL of registered agents.
 
-## Prerequisites
+## Running this component on your workstation
 
-You need the following tools to build and run this app:
-
-- Java Development Kit 17+
-- Maven 3.8+
-- Tanzu CLI
-
-## How to run this app?
-
-Run this command to build and run the app on your workstation:
+Use this command to run this component on your workstation:
 
 ```shell
 mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
-The app is available at http://localhost:8080.
+The app is available at http://localhost:8083.
 
-## How to deploy this app?
+You may want to customize the configuration by registering trading agent URLs.
+Open the file `src/main/resources/application-dev.yaml` and edit this section accordingly:
 
-Run this command to deploy this app to your developer namespace:
+```yaml
+app:
+  invoker:
+    urls:
+    - http://localhost:8082
+    - http://localhost:9000
+```
+
+## Deploying with VMware Tanzu Application Platform
+
+Use this command to deploy this component to your favorite Kubernetes cluster:
 
 ```shell
 tanzu apps workload apply -f config/workload.yaml
 ```
 
-## How to enable/disable OpenTelemetry?
+The platform will take care of building, testing and deploying this component.
 
-OpenTelemetry support is included in this app.
-Depending on what you need, you may want to enable/disable OpenTelemetry.
+This component also loads some configuration from a
+[Git repository](https://github.com/alexandreroman/sta-config).
 
-Edit the file [`src/main/resources/application.yaml`](src/main/resources/application.yaml):
+Run this command to create a Kubernetes `Secret` out of this Git repository,
+which will be used by the component at runtime:
 
-```yaml
-management:
-  tracing:
-    # Set to true to forward tracing spans to a local Zipkin instance.
-    enabled: false
-  otlp:
-    metrics:
-      export:
-        # Set to true to forward metrics to a local OpenTelemetry collector.
-        enabled: false
+```shell
+kubectl apply -f config/app-operator
+```
+
+Run this command to get deployment status:
+
+```shell
+tanzu apps workload get sta-invoker
 ```
