@@ -1,0 +1,16 @@
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ClassClaim
+metadata:
+  name: sta-invoker-oauth2
+spec:
+  classRef:
+    name: sso
+  parameters:
+    workloadRef:
+      name: sta-invoker
+    clientAuthenticationMethod: client_secret_basic
+    authorizationGrantTypes:
+    - client_credentials
+    scopes:
+    - name: bid admin
+    requireUserConsent: false

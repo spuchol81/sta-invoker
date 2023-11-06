@@ -9,7 +9,7 @@ metadata:
 spec:
   source:
     git:
-      url: https://github.com/alexandreroman/sta-invoker.git
+      url: https://github.com/spuchol81/sta-invoker.git
       ref:
         branch: main
   build:

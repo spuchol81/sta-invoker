@@ -5,7 +5,7 @@ metadata:
 spec:
   backends:
   - type: git
-    uri: https://github.com/alexandreroman/sta-config
+    uri: https://github.com/spuchol81/sta-config
     defaultLabel: main
     searchPaths:
     - sta
